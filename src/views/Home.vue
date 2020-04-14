@@ -4,13 +4,13 @@
         <div>
           whaT?
         </div>
-        <div ref='k' style="width:500px;float:left;background-color:#ccc;height:500px" class="chart-box"></div>
+        <div ref='k' style="width:100%;float:left;background-color:#ccc;height:500px" class="chart-box"></div>
     
     
-        <div style="display:flex;flex-wrap:wrap;width:100px;">
-            <button style="width:99px;height:59px" @mouseenter="chosen=i,ininchartbar()" v-for="i in list" :key='i'>{{i}}</button>
+        <div style="display:flex;flex-wrap:wrap;width:100vw;">
+            <button style="width:10vw;height:59px" @mouseenter="chosen=i,ininchartbar()" v-for="i in list" :key='i'>{{i}}</button>
         </div>
-      
+      {{chosen}}
   </div>
   
 </template>
@@ -24,19 +24,28 @@ export default {
       char1: null,
       char2: null,
       chosen: -1,
-      list:[0,1,2,3,4,5,6]
+      list:[0,1,2,3,4,5,6],
+      t1:null,
     }
   },
   activated () {
     if (this.char1) {
       this.char1.resize()
     }
+
     // if (this.char2) {
     //   this.char2.resize()
     // }
   },
   mounted () {
     this.ininchartbar()
+    // this.t1 = setInterval(() => {
+    //   this.chosen++
+    //   if(this.chosen == 7){
+    //     this.chosen = 0
+    //   }
+    //   this.ininchartbar()
+    // }, 50);
     // this.initchartmap()
   },
   methods: {
@@ -46,7 +55,9 @@ export default {
           type: 'category',
           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         },
-        
+        title:{
+          text:'13543464'
+        },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
@@ -76,7 +87,7 @@ export default {
                     '#F4E001', '#F0805A', '#26C0C0'
                   ]
                   if(this.chosen == params.dataIndex){
-                    return colorList[params.dataIndex]
+                    return colorList[this.chosen]
                   }
                   return '#666'
                 }

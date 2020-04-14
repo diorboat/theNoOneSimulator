@@ -1,6 +1,6 @@
 <template>
     <div id= 'nothing' style="display: flex;">
-      <div style="width:70vw">
+      <div style="width:55vw">
         <div class="k">
           <div class="nothing" :style="style">
             <div style="position:absolute">
@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="k" style="top:5px;left:0px;">
-          <div class="nothing" :style="style2">
+          <div class="nothing" @mousedown="mouse" :style="style2">
             <div style="position:absolute">
               <div class='pol' >
                 <div class="circle"></div>
@@ -24,19 +24,21 @@
               </div>
             </div>
           </div>
+          <div class="kedu"></div>
         </div>
       </div>
       <div style="flex1">
         <div>
-          <span>{{now2}}--{{Math.floor(now*1000000/hell)/10000}}</span>
+          <span>{{Math.floor(now*100000/hell)/1000}}--{{now2}}</span>
         </div>
     
         <div style="margin-top:20px">
-          <span>{{now3}}</span>--
+          
+          <el-tag width='80px' type="success">{{now3}}</el-tag>
           <span>{{hell}}</span>
         </div>
       </div>
-      <div><input type="text" v-model="ssssk" @change="show"></div>
+      
     </div>
 </template>
 <script>
@@ -46,7 +48,7 @@ export default {
       // style:[{left:'calc('+44+'vw - 30px)'}],
       // style2:[{left:'calc('+44+'vw - 30px)'}],
       date: new Date(),
-      hell:9*5*60*60 -60*30,
+      hell:9*5*60*60,
       now:0,
       now2:0,
       now3:0,
@@ -73,22 +75,25 @@ export default {
       var s= n.getSeconds()
       var w = 5*9*60*60
       this.now = d*9*60*60 + h*60*60 +m*60 + s
-      var a2 = (h*60*60 +m*60 + s)
+      var a2 = h*60*60 +m*60 + s
       this.now3 = Math.floor(a2/3.24)/100
-      this.style = [{left:'calc('+(Math.floor(this.now*100/this.hell)/2)+'vw - 52px)'}]
-      this.style2 = [{left:'calc('+Math.floor(this.now3/2 +5)+'vw - 52px)'}]
+      this.style = [{left:'calc('+(Math.floor(this.now*10000/this.hell)/200)+'vw - 42px)'}]
+      this.style2 = [{left:'calc('+(Math.floor(this.now3*100/2))/100+'vw - 42px)'}]
 
     }, 1000)
     this.t1 = setInterval(() => {
-      var  l = new Date().getTime()%10
-
-      this.now2 = this.now + l/10
-    }, 100);
+      
+      
+      this.now2 = 5*9*60*60 - this.now
+    }, 1000);
   },
   methods:{
     show(){
       console.log(this.ssssk == this.kkk)
       this.ssssk = null
+    },
+    mouse(e){
+      console.log(e)
     }
   },
   computed:{
@@ -129,7 +134,7 @@ export default {
     width: 150px;
     height: 150px;
     top: -120px;
-    left: -75px;
+    left: -60px;
     animation:round 4.2s infinite linear;
     opacity:0.8 ;
   }
@@ -138,19 +143,19 @@ export default {
   }
   .c1{
     animation:round 2s infinite linear;
-    opacity: 0.9
+    opacity: 0.3
   }
   .c1{
     animation:round 4.5s infinite linear;
-    opacity: 0.9
+    opacity: 0.3
   }
   .c1{
     animation:round 3.5s infinite linear;
-    opacity: 0.9
+    opacity: 0.3
   }
   .c1{
     animation:round 3.8s 1s infinite linear;
-    opacity: 0.9
+    opacity: 0.3
   }
   @keyframes round{
     0%{
@@ -171,7 +176,7 @@ export default {
     background: #1f9;
     overflow: hidden
   }
-  
+ 
   .nothing{
     position: absolute;
     left: 30vw;
@@ -179,5 +184,14 @@ export default {
     width: calc(50vw + 52px);
     top: 0px;
     background: #ccc
+  }
+  .kedu{
+    position: absolute;
+    display: inline-block;
+    height: 100%;
+    width: 2px;
+    background: #f2a10f;
+    box-shadow: 0px 0px 15px 1px #F2A10F;
+    left: 33%
   }
 </style>
