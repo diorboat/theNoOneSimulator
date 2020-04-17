@@ -62,10 +62,10 @@ export default {
   },
   mounted () {
     var k = Math.floor(5693/7)/10
-    console.log(k)
+
     for (let index = 0; index < 100; index++) {
       k-=100
-      console.log(k)
+
     }
     this.t = setInterval(() => {
       var n = new Date()
